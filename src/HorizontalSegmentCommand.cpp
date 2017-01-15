@@ -13,7 +13,11 @@ namespace paulosuzart {
 HorizontalSegmentCommand::HorizontalSegmentCommand(
 		boost::multi_array<char, 2> *matriz, unsigned int x1, unsigned int x2,
 		unsigned int y, char color) :
-		x1(x1 - 1), x2(x2 - 1), y(y - 1), color(color), Command(matriz) {
+		Command(matriz) {
+	this->x1 = x1 - 1;
+	this->x2 = x2 - 1;
+	this->y = y - y;
+	this->color = color;
 }
 
 bool HorizontalSegmentCommand::run() {

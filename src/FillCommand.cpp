@@ -12,12 +12,13 @@
 using namespace std;
 namespace paulosuzart {
 
-FillCommand::FillCommand(boost::multi_array<char, 2> *matriz, unsigned int x, unsigned int y,
-		char color) :
-		x(x -1 ), y(y -1 ), color(color), Command(matriz) {
+FillCommand::FillCommand(boost::multi_array<char, 2> *matriz, unsigned int x,
+		unsigned int y, char color) :
+		Command(matriz), x(x - 1), y(y - 1), color(color) {
 }
 
-void FillCommand::changeColor(unsigned int n_x, unsigned int n_y, char originColor) {
+void FillCommand::changeColor(unsigned int n_x, unsigned int n_y,
+		char originColor) {
 	if (!isValidCoordinate(n_x, n_y))
 		return;
 

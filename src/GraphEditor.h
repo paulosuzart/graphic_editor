@@ -9,18 +9,8 @@
 #define GRAPHEDITOR_H_
 
 #include <iostream>
-#include <vector>
 #include <boost/multi_array.hpp>
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
 
-#include "InitCommand.h"
-#include "CleanCommand.h"
-#include "DoColorCommand.h"
-#include "VerticalSegmentCommand.h"
-#include "HorizontalSegmentCommand.h"
-#include "DrawRectCommand.h"
-#include "FillCommand.h"
 #include "CommandFactory.h"
 
 using namespace boost::algorithm;
