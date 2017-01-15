@@ -17,11 +17,9 @@ HorizontalSegmentCommand::HorizontalSegmentCommand(
 }
 
 bool HorizontalSegmentCommand::run() {
-	std::cout << "tebtar escrever entre as colunas " << x1 << " e " << x2
-			<< " linhas " << y << std::endl;
 	if (!isValidCoordinate(y, x1) || !isValidCoordinate(y, x2))
 		return false;
-	std::cout << "FOI " << x1 << " e " << x2 << std::endl;
+
 	for (auto i = x1; i <= x2; i++) {
 		(*matriz)[y][i] = color;
 	}

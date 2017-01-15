@@ -16,7 +16,7 @@ UnknownCommand::UnknownCommand(string command) :
 }
 
 bool UnknownCommand::run() {
-	cout << "Unknown command: " << command << endl;
+	//cout << "Unknown command: " << command << endl;
 	return true;
 }
 
