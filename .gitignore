@@ -27,3 +27,14 @@
 *.exe
 *.out
 *.app
+
+Release/src
+Debug/src
+
+Release/graphic_editor
+Debug/graphic_editor
+
+.cproject
+.dproject
+.settings
+.project
