@@ -39,7 +39,6 @@ bool Command::parseCommand(vector<string> params) {
 }
 
 Command::~Command() {
-
 }
 
 } /* namespace paulosuzart */

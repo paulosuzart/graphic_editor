@@ -13,6 +13,10 @@ Application::Application(GraphEditor* editor) :
 		editor(editor) {
 
 }
+
+Application::~Application() {
+	delete editor;
+}
 // TODO Auto-generated constructor stub
 void Application::runCommand(std::string command) {
 	std::unique_ptr<Command> cmd_ptr(getCommand(command));
@@ -60,6 +64,7 @@ Command* Application::getCommand(std::string command) {
 	}
 	return new UnknownCommand(command);
 }
+
 void Application::run() {
 	std::string command;
 	while (std::getline(std::cin, command)) {

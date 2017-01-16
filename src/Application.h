@@ -24,6 +24,7 @@ namespace paulosuzart {
 
 class Application {
 public:
+	~Application();
 	Application(GraphEditor* editor);
 	void run();
 	Command* getCommand(std::string command);

@@ -7,9 +7,7 @@
 
 #include "SaveCommand.h"
 
-
 namespace paulosuzart {
-
 
 paulosuzart::SaveCommand::~SaveCommand() {
 }
@@ -20,18 +18,16 @@ bool SaveCommand::doRun() {
 	return true;
 }
 
-SaveCommand::SaveCommand(GraphEditor* editor, string command) : Command(editor, command){
+SaveCommand::SaveCommand(GraphEditor* editor, string command) :
+		Command(editor, command) {
 }
 
 bool SaveCommand::parseCommand(vector<string> params) {
 	if (params.size() != 2)
 		return false;
-	string fileName = boost::lexical_cast<string>(params[1]);
+	fileName = boost::lexical_cast<string>(params[1]);
 	return true;
 }
 
-
-
 }
-
 

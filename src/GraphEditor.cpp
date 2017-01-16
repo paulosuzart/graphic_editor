@@ -14,13 +14,13 @@ GraphEditor::GraphEditor() {
 }
 
 GraphEditor::~GraphEditor() {
-	cout << "ditor being deketed" << endl;
+
 }
 
 void GraphEditor::display() {
 	for (size_t x = 0; x < a.shape()[0]; x++) {
 		for (size_t y = 0; y < a.shape()[1]; y++) {
-			std::cout << a[x][y] << " ";
+			std::cout << a[x][y];
 		}
 		cout << endl;
 	}

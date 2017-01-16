@@ -24,7 +24,7 @@ public:
 
 protected:
 	bool parseCommand(vector<string> params) override;
-	bool doRun();
+	bool doRun() override;
 
 private:
 	string fileName;
