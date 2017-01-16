@@ -10,18 +10,28 @@
 
 namespace paulosuzart {
 
-InitCommand::InitCommand(boost::multi_array<char, 2> *matriz, unsigned int x,
-		unsigned int y) :
-		Command(matriz), x(x), y(y) {
-}
-
-bool InitCommand::run() {
-	matriz->resize(boost::extents[x][y]);
-	return CleanCommand(matriz).run();
+InitCommand::InitCommand(GraphEditor *editor, string command) :
+		Command(editor, command), lines(0), cols(0) {
 }
 
 InitCommand::~InitCommand() {
+}
+
+bool InitCommand::doRun() {
+	editor->setSize(lines, cols);
+	editor->reset();
+	return true;
+}
+
+bool InitCommand::parseCommand(vector<string> params) {
+	if (params.size() != 3)
+		return false;
+
+	cols = boost::lexical_cast<unsigned int>(params[1]);
+	lines = boost::lexical_cast<unsigned int>(params[2]);
+	return true;
 
 }
 
 } /* namespace paulosuzart */
+

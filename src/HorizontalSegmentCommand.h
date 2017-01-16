@@ -18,14 +18,16 @@ namespace paulosuzart {
 
 class HorizontalSegmentCommand: public Command {
 public:
-	HorizontalSegmentCommand(boost::multi_array<char, 2> *matriz,
-			unsigned int x1, unsigned int x2, unsigned int y, char color);
+	HorizontalSegmentCommand(GraphEditor *editor, string command);
 	~HorizontalSegmentCommand();
-	bool run();
+
+protected:
+	bool doRun() override;
+	bool parseCommand(vector<string> params) override;
 
 private:
-	unsigned int x1, x2, y;
-	char color;
+	unsigned int col1 = 0, col2 = 0 , line = 0;
+	char color = DEFAULT_COLOR;
 };
 
 } /* namespace paulosuzart */

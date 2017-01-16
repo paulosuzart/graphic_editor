@@ -19,9 +19,12 @@ namespace paulosuzart {
 
 class SaveCommand: public Command {
 public:
-	SaveCommand(boost::multi_array<char, 2>* matriz, string fileName);
+	SaveCommand(GraphEditor *editor, string command);
 	~SaveCommand();
-	bool run();
+
+protected:
+	bool parseCommand(vector<string> params) override;
+	bool doRun();
 
 private:
 	string fileName;

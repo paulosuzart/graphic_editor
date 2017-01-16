@@ -9,17 +9,27 @@
 #define COMMAND_H_
 
 #include <boost/multi_array.hpp>
+#include "GraphEditor.h"
+#include <boost/algorithm/string.hpp>
+#include <boost/lexical_cast.hpp>
+using namespace boost::algorithm;
 
 namespace paulosuzart {
 
 class Command {
+
 public:
-	Command(boost::multi_array<char, 2> *matriz);
-	virtual bool run() =0;
+	Command(GraphEditor *editor, string command);
 	virtual ~Command();
+	virtual bool run();
+
 protected:
-	bool isValidCoordinate(unsigned int x, unsigned int y);
-	boost::multi_array<char, 2>* matriz;
+	virtual bool parseCommand(vector<string> params);
+	virtual bool doRun();
+	GraphEditor *editor;
+
+private:
+	string command;
 };
 
 } /* namespace paulosuzart */

@@ -10,16 +10,14 @@
 namespace paulosuzart {
 
 GraphEditor::GraphEditor() {
-	// TODO Auto-generated constructor stub
 
 }
 
 GraphEditor::~GraphEditor() {
-
+	cout << "ditor being deketed" << endl;
 }
 
 void GraphEditor::display() {
-	cout << "Displaying multi array" << endl;
 	for (size_t x = 0; x < a.shape()[0]; x++) {
 		for (size_t y = 0; y < a.shape()[1]; y++) {
 			std::cout << a[x][y] << " ";
@@ -28,24 +26,44 @@ void GraphEditor::display() {
 	}
 }
 
-void GraphEditor::takeCommand(string input) {
-	matrix* a_p = &a;
-	Command* command = factory.getCommand(input, a_p);
-	if (!command->run())
-		std::cout << "Failed to run: " << input
-				<< " pelase check provided matriz indexes" << std::endl;
-	delete command;
+void GraphEditor::setSize(unsigned int lines, unsigned int cols) {
+	a.resize(boost::extents[lines][cols]);
 }
 
-void GraphEditor::run() {
-	string command;
-	while (std::getline(std::cin, command)) {
-		// handles special case for X
-		if (command == "X") {
-			exit(0);
+void GraphEditor::setColor(unsigned int line, unsigned int col, char color) {
+	drawRect(line, col, line, col, color);
+}
+
+void paulosuzart::GraphEditor::drawRect(unsigned int x1, unsigned int y1,
+		unsigned int x2, unsigned int y2, char color) {
+
+//	if (x1 == x2 && y1 == y2) {
+//
+//		a[x1][y1] = color;
+//
+//	} else {
+
+		for (auto i = x1; i <= x2; i++) {
+			for (auto j = y1; j <= y2; j++) {
+
+				a[i][j] = color;
+			}
 		}
-		takeCommand(command);
-	}
+//	}
+}
+void GraphEditor::reset() {
+	drawRect(0, 0, a.shape()[0] - 1, a.shape()[1] - 1, DEFAULT_COLOR);
 }
 
-} /* namespace paulosuzart */
+char GraphEditor::getColor(unsigned int line, unsigned int col) {
+	return a[line][col];
+}
+
+bool GraphEditor::isValidCoordinate(unsigned int line, unsigned int col) {
+	if (line >= a.shape()[0] || col >= a.shape()[1])
+		return false;
+	return true;
+}
+
+}
+

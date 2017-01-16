@@ -1,29 +1,32 @@
 /*
- * CommandFactory.cpp
+ * Application.cpp
  *
- *  Created on: Jan 14, 2017
+ *  Created on: Jan 16, 2017
  *      Author: suzart
  */
 
-#include "CommandFactory.h"
-#include "InitCommand.h"
-#include "CleanCommand.h"
-#include "DoColorCommand.h"
-#include "VerticalSegmentCommand.h"
-#include "HorizontalSegmentCommand.h"
-#include "DrawRectCommand.h"
-#include "FillCommand.h"
-#include "UnknownCommand.h"
-#include "SaveCommand.h"
+#include "Application.h"
 
 namespace paulosuzart {
 
-Command* CommandFactory::getCommand(char* command, GraphEditor *editor) {
+Application::Application(GraphEditor* editor) :
+		editor(editor) {
+
+}
+// TODO Auto-generated constructor stub
+void Application::runCommand(std::string command) {
+	std::unique_ptr<Command> cmd_ptr(getCommand(command));
+	if (!cmd_ptr->run())
+		std::cout << "Failed to run: "
+				<< " pelase check provided matriz indexes" << std::endl;
+
+}
+
+Command* Application::getCommand(std::string command) {
 	//vector<string> v; //TODO: Use lighter structure instead of vector
 	//split(v, command, is_space());
 
 	if (command[0] == 'I') {
-
 		return new InitCommand(editor, command);
 	}
 
@@ -56,6 +59,17 @@ Command* CommandFactory::getCommand(char* command, GraphEditor *editor) {
 		return new SaveCommand(editor, command);
 	}
 	return new UnknownCommand(command);
+}
+void Application::run() {
+	std::string command;
+	while (std::getline(std::cin, command)) {
+		// handles special case for X
+		if (command == "X") {
+			exit(0);
+		}
+
+		runCommand(command);
+	}
 }
 
 } /* namespace paulosuzart */

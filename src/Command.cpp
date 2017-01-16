@@ -8,21 +8,38 @@
 #include "Command.h"
 #include <iostream>
 
+using namespace std;
+
 namespace paulosuzart {
 
-Command::Command(boost::multi_array<char, 2> *matriz) :
-		matriz(matriz) {
+Command::Command(GraphEditor* editor, string command) :
+		editor(editor), command(command) {
 }
 
-bool Command::isValidCoordinate(unsigned int x, unsigned int y) {
-	if (x < 0 || x >= matriz->shape()[0] || y < 0
-			|| y >= matriz->shape()[1] )
-		return false;
+bool Command::run() {
+	try {
 
+		vector<string> v;
+		split(v, command, is_space());
+		return parseCommand(v) && doRun();
+
+	} catch (const boost::bad_lexical_cast &e) {
+		std::cerr << "Ignoring command '" << command
+				<< "' due to invalid input type" << std::endl;
+		return true;
+	}
+}
+
+bool Command::doRun() {
+	return true;
+}
+
+bool Command::parseCommand(vector<string> params) {
 	return true;
 }
 
 Command::~Command() {
 
 }
+
 } /* namespace paulosuzart */

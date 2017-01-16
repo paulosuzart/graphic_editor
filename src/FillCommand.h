@@ -16,16 +16,18 @@ namespace paulosuzart {
 class FillCommand: public Command {
 public:
 
-	FillCommand(boost::multi_array<char, 2> *matriz, unsigned int x,
-			unsigned int y, char color);
-	bool run();
+	FillCommand(GraphEditor *editor, string command);
 	~FillCommand();
 
+protected:
+	bool parseCommand(vector<string> params) override;
+	bool doRun() override;
+
 private:
-	unsigned int x;
-	unsigned int y;
-	char color;
-	void changeColor(unsigned int x, unsigned int y, char originColor);
+	unsigned int line = 0;
+	unsigned int col = 0;
+	char color = DEFAULT_COLOR;
+	void changeColor(unsigned int c_line, unsigned int c_col, char originColor);
 };
 
 } /* namespace paulosuzart */

@@ -9,23 +9,27 @@
 
 namespace paulosuzart {
 
-VerticalSegmentCommand::VerticalSegmentCommand(
-		boost::multi_array<char, 2>* matriz, unsigned int x, unsigned int y1, unsigned int y2, char color) :
-		x(x - 1), y1(y1 - 1), y2(y2 - 1), color(color), Command(matriz) {
-}
-
-bool VerticalSegmentCommand::run() {
-	if (!isValidCoordinate(y1, x) || !isValidCoordinate(y2, x))
-		return false;
-
-	for (auto i = y1; i <= y2; i++) {
-		(*matriz)[i][x] = color;
-	}
-	return true;
+VerticalSegmentCommand::VerticalSegmentCommand(GraphEditor* editor,
+		string command) :
+		Command(editor, command) {
 }
 
 VerticalSegmentCommand::~VerticalSegmentCommand() {
+}
 
+bool VerticalSegmentCommand::doRun() {
+	editor->drawRect(line1, col, line2, col, color);
+	return true;
+}
+
+bool VerticalSegmentCommand::parseCommand(vector<string> params) {
+	if (params.size() != 5)
+		return false;
+	col = boost::lexical_cast<unsigned int>(params[1]) - 1;
+	line1 = boost::lexical_cast<unsigned int>(params[2]) - 1;
+	line2 = boost::lexical_cast<unsigned int>(params[3]) - 1;
+	color = boost::lexical_cast<char>(params[4]);
+	return true;
 }
 
 } /* namespace paulosuzart */

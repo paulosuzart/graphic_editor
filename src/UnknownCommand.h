@@ -17,7 +17,6 @@ class UnknownCommand: public Command {
 public:
 	UnknownCommand(string command);
 	~UnknownCommand();
-	bool run();
 
 private:
 	string command;

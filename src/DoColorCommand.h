@@ -20,15 +20,19 @@ namespace paulosuzart {
 
 class DoColorCommand: public Command {
 public:
+
+	DoColorCommand(GraphEditor *editor, string command);
 	~DoColorCommand();
-	DoColorCommand(boost::multi_array<char, 2>* matriz, unsigned  int x, unsigned  int y,
-			char color);
-	bool run();
+
+protected:
+	bool doRun() override;
+	bool parseCommand(vector<string> params) override;
+
 
 private:
-	unsigned int x = 0;
-	unsigned int y = 0 ;
-	char color = '0';
+	unsigned int line = 0;
+	unsigned int col = 0 ;
+	char color = DEFAULT_COLOR;
 };
 
 } /* namespace paulosuzart */

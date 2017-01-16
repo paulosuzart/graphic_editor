@@ -18,14 +18,16 @@ namespace paulosuzart {
 
 class InitCommand: public Command {
 public:
-	InitCommand(boost::multi_array<char, 2>* matriz, unsigned int x,
-			unsigned int y);
+	InitCommand(GraphEditor *editor, string command);
 	~InitCommand();
-	bool run();
+
+protected:
+	bool parseCommand(vector<string> params) override;
+	bool doRun() override;
 
 private:
-	int x;
-	int y;
+	unsigned int lines;
+	unsigned int cols;
 };
 
 } /* namespace paulosuzart */

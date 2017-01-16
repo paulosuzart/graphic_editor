@@ -18,19 +18,21 @@ namespace paulosuzart {
 
 class VerticalSegmentCommand: public Command {
 public:
-	VerticalSegmentCommand(boost::multi_array<char, 2>* matriz, unsigned int x,
-			unsigned int y1, unsigned int y2, char color);
+	VerticalSegmentCommand(GraphEditor *editor, string command);
 	~VerticalSegmentCommand();
-	bool run();
+
+protected:
+	bool doRun() override;
+	bool parseCommand(vector<string> params) override;
 
 private:
-	unsigned int x;
-	unsigned int y1;
-	unsigned int y2;
-	char color;
-
+	unsigned int col = 0;
+	unsigned int line1 = 0;
+	unsigned int line2 = 0;
+	char color = DEFAULT_COLOR;
 };
 
 } /* namespace paulosuzart */
 
 #endif /* VERTICALSEGMENTCOMMAND_H_ */
+

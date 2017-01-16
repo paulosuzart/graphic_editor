@@ -10,24 +10,28 @@
 
 namespace paulosuzart {
 
-} /* namespace paulosuzart */
-
-paulosuzart::SaveCommand::SaveCommand(boost::multi_array<char, 2>* matriz,
-		string fileName) :
-		Command(matriz), fileName(fileName) {
-}
 
 paulosuzart::SaveCommand::~SaveCommand() {
 }
 
-bool paulosuzart::SaveCommand::run() {
+bool SaveCommand::doRun() {
 	std::cout << fileName << std::endl;
-	for (size_t x = 0; x < matriz->shape()[0]; x++) {
-		for (size_t y = 0; y < matriz->shape()[1]; y++) {
-			std::cout << (*matriz)[x][y] << " ";
-		}
-		cout << endl;
-	}
-
+	editor->display();
 	return true;
 }
+
+SaveCommand::SaveCommand(GraphEditor* editor, string command) : Command(editor, command){
+}
+
+bool SaveCommand::parseCommand(vector<string> params) {
+	if (params.size() != 2)
+		return false;
+	string fileName = boost::lexical_cast<string>(params[1]);
+	return true;
+}
+
+
+
+}
+
+

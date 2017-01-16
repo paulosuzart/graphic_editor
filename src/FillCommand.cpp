@@ -12,31 +12,42 @@
 using namespace std;
 namespace paulosuzart {
 
-FillCommand::FillCommand(boost::multi_array<char, 2> *matriz, unsigned int x,
-		unsigned int y, char color) :
-		Command(matriz), x(x - 1), y(y - 1), color(color) {
-}
-
-void FillCommand::changeColor(unsigned int n_x, unsigned int n_y,
+void FillCommand::changeColor(unsigned int c_line, unsigned int c_col,
 		char originColor) {
-	if (!isValidCoordinate(n_x, n_y))
+
+	if(!editor->isValidCoordinate(c_line, c_col))
 		return;
 
-	if ((*matriz)[n_x][n_y] == originColor) {
-		(*matriz)[n_x][n_y] = color;
-		changeColor(n_x + 1, n_y, originColor);
-		changeColor(n_x - 1, n_y, originColor);
-		changeColor(n_x, n_y + 1, originColor);
-		changeColor(n_x, n_y - 1, originColor);
+	if (editor->getColor(c_line, c_col) == originColor) {
+		editor->setColor(c_line, c_col, color);
+		changeColor(c_line + 1, c_col, originColor);
+		changeColor(c_line - 1, c_col, originColor);
+		changeColor(c_line, c_col + 1, originColor);
+		changeColor(c_line, c_col - 1, originColor);
 	}
 }
 
-bool FillCommand::run() {
-	changeColor(x, y, (*matriz)[x][y]);
+bool FillCommand::doRun() {
+	changeColor(line, col, editor->getColor(line, col));
 	return true;
+}
+
+FillCommand::FillCommand(GraphEditor* editor, string command) :
+		Command(editor, command) {
 }
 
 FillCommand::~FillCommand() {
 
 }
+
+bool FillCommand::parseCommand(vector<string> params) {
+	if (params.size() != 4)
+		return false;
+
+	col = boost::lexical_cast<unsigned int>(params[1]) - 1;
+	line = boost::lexical_cast<unsigned int>(params[2]) - 1;
+	color = boost::lexical_cast<char>(params[3]);
+	return true;
+}
+
 } /* namespace paulosuzart */

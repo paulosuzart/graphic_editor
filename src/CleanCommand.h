@@ -15,9 +15,11 @@ namespace paulosuzart {
 
 class CleanCommand : public Command {
 public:
-	CleanCommand(boost::multi_array<char, 2> *matriz);
+	CleanCommand(GraphEditor *editor, string command);
 	~CleanCommand();
-	bool run();
+
+protected:
+	bool doRun() override;
 };
 
 

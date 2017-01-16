@@ -9,31 +9,30 @@
 
 namespace paulosuzart {
 
-DrawRectCommand::DrawRectCommand(boost::multi_array<char, 2> *matriz,
-		unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2,
-		char color) :
-		Command(matriz) {
-	this->x1 = x1 - 1;
-	this->x2 = x2 - 1;
-	this->y1 = y1 - 1;
-	this->y2 = y2 - 1;
-	this->color = color;
-
-}
-
-bool DrawRectCommand::run() {
-	if (!isValidCoordinate(x1, y1) || !isValidCoordinate(x2, y2))
-		return false;
-
-	for (auto i = x1; i <= x2; i++) {
-		for (auto j = y1; j <= y2; j++) {
-			(*matriz)[i][j] = color;
-		}
-	}
-	return true;
-}
-
 DrawRectCommand::~DrawRectCommand() {
 
 }
+
+DrawRectCommand::DrawRectCommand(GraphEditor* editor, string command) :
+		Command(editor, command) {
+}
+
+bool DrawRectCommand::doRun() {
+	editor->drawRect(line1, col1, line2, col2, color);
+	return true;
+}
+
+bool DrawRectCommand::parseCommand(vector<string> params) {
+	if (params.size() != 6)
+		return false;
+
+	col1 = boost::lexical_cast<unsigned int>(params[1]) - 1;
+	line1 = boost::lexical_cast<unsigned int>(params[2]) - 1;
+	col2 = boost::lexical_cast<unsigned int>(params[3]) - 1;
+	line2 = boost::lexical_cast<unsigned int>(params[4]) - 1;
+	color = boost::lexical_cast<char>(params[5]);
+	return true;
+
+}
+
 } /* namespace paulosuzart */

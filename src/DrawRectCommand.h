@@ -20,13 +20,15 @@ namespace paulosuzart {
 class DrawRectCommand: public Command {
 public:
 	~DrawRectCommand();
-	DrawRectCommand(boost::multi_array<char, 2> *matriz, unsigned int x1,
-			unsigned int y1, unsigned int x2, unsigned int y2, char color);
-	bool run();
+	DrawRectCommand(GraphEditor *editor, string command);
+
+protected:
+	bool doRun() override;
+	bool parseCommand(vector<string> params) override;
 
 private:
-	unsigned int x1, y1, x2, y2;
-	char color;
+	unsigned int line1 = 0 , col1 = 0 , line2 = 0 , col2 = 0;
+	char color = DEFAULT_COLOR;
 };
 
 } /* namespace paulosuzart */

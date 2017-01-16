@@ -12,12 +12,7 @@ using namespace std;
 
 namespace paulosuzart {
 UnknownCommand::UnknownCommand(string command) :
-		Command(NULL), command(command) {
-}
-
-bool UnknownCommand::run() {
-	//cout << "Unknown command: " << command << endl;
-	return true;
+		Command(NULL, command) {
 }
 
 UnknownCommand::~UnknownCommand() {

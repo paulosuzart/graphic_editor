@@ -19,7 +19,7 @@ namespace paulosuzart {
 
 class CommandFactory {
 public:
-	Command* getCommand(string command, boost::multi_array<char, 2> *matriz);
+	Command* getCommand(char* command, GraphEditor *editor);
 };
 
 } /* namespace paulosuzart */
