@@ -20,7 +20,7 @@ public:
 	~FillCommand();
 
 protected:
-	bool parseCommand(vector<string> params) override;
+	bool parseCommand(vector<string>& params) override;
 	bool doRun() override;
 
 private:

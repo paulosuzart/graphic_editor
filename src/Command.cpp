@@ -34,7 +34,7 @@ bool Command::doRun() {
 	return true;
 }
 
-bool Command::parseCommand(vector<string> params) {
+bool Command::parseCommand(vector<string>& params) {
 	return true;
 }
 

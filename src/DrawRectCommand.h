@@ -24,7 +24,7 @@ public:
 
 protected:
 	bool doRun() override;
-	bool parseCommand(vector<string> params) override;
+	bool parseCommand(vector<string>& params) override;
 
 private:
 	unsigned int line1 = 0 , col1 = 0 , line2 = 0 , col2 = 0;

@@ -24,7 +24,7 @@ bool DoColorCommand::doRun() {
 	return true;
 }
 
-bool DoColorCommand::parseCommand(vector<string> params) {
+bool DoColorCommand::parseCommand(vector<string>& params) {
 
 	if (params.size() != 4)
 		return false;

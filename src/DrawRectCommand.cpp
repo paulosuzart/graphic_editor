@@ -22,7 +22,7 @@ bool DrawRectCommand::doRun() {
 	return true;
 }
 
-bool DrawRectCommand::parseCommand(vector<string> params) {
+bool DrawRectCommand::parseCommand(vector<string>& params) {
 	if (params.size() != 6)
 		return false;
 

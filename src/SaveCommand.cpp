@@ -22,7 +22,7 @@ SaveCommand::SaveCommand(GraphEditor* editor, string command) :
 		Command(editor, command) {
 }
 
-bool SaveCommand::parseCommand(vector<string> params) {
+bool SaveCommand::parseCommand(vector<string>& params) {
 	if (params.size() != 2)
 		return false;
 	fileName = boost::lexical_cast<string>(params[1]);

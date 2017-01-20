@@ -23,7 +23,7 @@ bool InitCommand::doRun() {
 	return true;
 }
 
-bool InitCommand::parseCommand(vector<string> params) {
+bool InitCommand::parseCommand(vector<string>& params) {
 	if (params.size() != 3)
 		return false;
 

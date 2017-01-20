@@ -40,7 +40,7 @@ FillCommand::~FillCommand() {
 
 }
 
-bool FillCommand::parseCommand(vector<string> params) {
+bool FillCommand::parseCommand(vector<string>& params) {
 	if (params.size() != 4)
 		return false;
 

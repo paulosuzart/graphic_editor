@@ -24,7 +24,7 @@ public:
 	virtual bool run();
 
 protected:
-	virtual bool parseCommand(vector<string> params);
+	virtual bool parseCommand(vector<string>& params);
 	virtual bool doRun();
 	GraphEditor *editor;
 

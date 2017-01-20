@@ -24,7 +24,7 @@ bool HorizontalSegmentCommand::doRun() {
 	return true;
 }
 
-bool HorizontalSegmentCommand::parseCommand(vector<string> params) {
+bool HorizontalSegmentCommand::parseCommand(vector<string>& params) {
 	if (params.size() != 5)
 		return false;
 

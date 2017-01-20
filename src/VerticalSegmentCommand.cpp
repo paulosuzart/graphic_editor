@@ -22,7 +22,7 @@ bool VerticalSegmentCommand::doRun() {
 	return true;
 }
 
-bool VerticalSegmentCommand::parseCommand(vector<string> params) {
+bool VerticalSegmentCommand::parseCommand(vector<string>& params) {
 	if (params.size() != 5)
 		return false;
 	col = boost::lexical_cast<unsigned int>(params[1]) - 1;
